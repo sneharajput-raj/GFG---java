@@ -9,25 +9,17 @@ class Node {
 } */
 
 class Solution {
-    public int count(Node head){
-        int c = 0;
-        while(head != null){
-            c++;
-            head = head.next;
-        }
-        return c;
-    }
     public int getKthFromLast(Node head, int k) {
-        int n = count(head);
-        if(k > n) return -1;
-        int[] arr = new int[n];
-        int i=0;
-        Node temp = head;
-        while(temp != null){
-            arr[i] = temp.data;
-            i++;
-            temp = temp.next;
-        }
-        return arr[n-k];
+       Node slow = head;
+       Node fast = head;
+       for(int i=0; i<k; i++){
+           if(fast == null) return -1;
+           fast = fast.next;
+       }
+       while(fast != null){
+           slow = slow.next;
+           fast = fast.next;
+       }
+       return slow.data;
     }
 }
